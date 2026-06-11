@@ -38,3 +38,40 @@ CREATE TABLE IF NOT EXISTS modulos_activos (
     activado_en TIMESTAMP DEFAULT NOW(),
     UNIQUE(modulo_id)
 );
+
+-- ====================================================
+-- Módulo de Proyectos
+-- ====================================================
+CREATE TABLE IF NOT EXISTS clientes (
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255),
+    telefono VARCHAR(50),
+    empresa VARCHAR(255),
+    creado_por BIGINT NOT NULL REFERENCES usuarios(id),
+    creado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS proyectos (
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    estado VARCHAR(20) DEFAULT 'PLANIFICANDO' CHECK (estado IN ('PLANIFICANDO', 'EN_PROCESO', 'FINALIZANDO', 'ACABADO')),
+    fecha_inicio DATE DEFAULT CURRENT_DATE,
+    fecha_fin DATE,
+    descripcion TEXT,
+    creado_por BIGINT NOT NULL REFERENCES usuarios(id),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS proyectos_empleados (
+    proyecto_id BIGINT NOT NULL REFERENCES proyectos(id) ON DELETE CASCADE,
+    usuario_id BIGINT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    PRIMARY KEY (proyecto_id, usuario_id)
+);
+
+CREATE TABLE IF NOT EXISTS proyectos_clientes (
+    proyecto_id BIGINT NOT NULL REFERENCES proyectos(id) ON DELETE CASCADE,
+    cliente_id BIGINT NOT NULL REFERENCES clientes(id) ON DELETE CASCADE,
+    PRIMARY KEY (proyecto_id, cliente_id)
+);
