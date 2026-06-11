@@ -356,6 +356,9 @@ tbody td { padding: 12px 14px; font-size: 14px; }
 .toggle.activo::after { transform: translateX(18px); }
 .toggle-texto { font-size: 13px; color: var(--color-texto-secundario); }
 
+.usuario-fila { display: flex; align-items: center; gap: 14px; }
+.avatar-tabla { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primario), var(--color-acento)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
+
 #contenedor-toast {
     position: fixed; bottom: 24px; right: 24px;
     display: flex; flex-direction: column; gap: 8px;
