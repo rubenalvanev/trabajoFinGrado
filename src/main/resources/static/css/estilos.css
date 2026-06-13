@@ -127,7 +127,7 @@ html, body {
 
 .campo-grupo { display: flex; flex-direction: column; gap: 6px; }
 .campo-etiqueta { font-size: 12px; font-weight: 500; color: var(--color-texto-secundario); letter-spacing: 0.5px; text-transform: uppercase; }
-.campo-input, .campo-select {
+.campo-input, .campo-select, .campo-textarea {
     background: var(--color-superficie-2);
     border: 1px solid var(--color-borde);
     color: var(--color-texto);
@@ -138,13 +138,14 @@ html, body {
     transition: var(--transicion);
     width: 100%;
 }
-.campo-input:focus, .campo-select:focus {
+.campo-input:focus, .campo-select:focus, .campo-textarea:focus {
     outline: none;
     border-color: var(--color-primario);
     box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
 }
 .campo-input::placeholder { color: var(--color-texto-tenue); }
 .campo-select option { background: var(--color-superficie); }
+.campo-textarea { resize: vertical; min-height: 80px; }
 
 .pantalla-login {
     position: fixed; inset: 0;
@@ -326,6 +327,27 @@ tbody td { padding: 12px 14px; font-size: 14px; }
     transition: var(--transicion);
 }
 .tarjeta-modulo:hover { border-color: var(--color-primario); }
+
+.cuadricula-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.tarjeta-estadistica {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-base);
+    padding: 20px;
+}
+
+.est-etiqueta { font-size: 12px; color: var(--color-texto-secundario); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.est-valor { font-family: var(--fuente-display); font-size: 26px; font-weight: 700; }
+.est-valor.positivo { color: var(--color-exito); }
+.est-valor.negativo { color: var(--color-peligro); }
+.est-valor.neutral { color: var(--color-texto); }
+
 .modulo-cabecera { display: flex; align-items: flex-start; justify-content: space-between; }
 .modulo-icono-wrap {
     width: 44px; height: 44px; border-radius: 10px;

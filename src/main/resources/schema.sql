@@ -53,3 +53,16 @@ CREATE TABLE IF NOT EXISTS grupos_modulos (
     modulo_id BIGINT NOT NULL REFERENCES modulos(id) ON DELETE CASCADE,
     UNIQUE(grupo_id, modulo_id)
 );
+
+CREATE TABLE IF NOT EXISTS fichajes (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL REFERENCES usuarios(id),
+    fecha DATE NOT NULL DEFAULT CURRENT_DATE,
+    hora_entrada TIMESTAMP,
+    hora_salida TIMESTAMP,
+    jornada_horas INTEGER NOT NULL DEFAULT 8,
+    observaciones VARCHAR(500),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW(),
+    UNIQUE(usuario_id, fecha)
+);

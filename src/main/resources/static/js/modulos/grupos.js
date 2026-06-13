@@ -1,6 +1,5 @@
 const GruposPanel = (() => {
 
-    // Cache para evitar llamadas repetidas durante la sesión del panel
     let todosLosUsuarios = [];
     let todosLosModulos = [];
 
@@ -73,7 +72,6 @@ const GruposPanel = (() => {
                 </div>
             </div>
 
-            <!-- Módulos asignados -->
             <div style="margin-top:12px;padding-bottom:12px;border-bottom:1px solid var(--color-borde);">
                 <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--color-texto-tenue);margin-bottom:6px;">
                     Módulos con acceso
@@ -89,7 +87,6 @@ const GruposPanel = (() => {
                 </div>
             </div>
 
-            <!-- Miembros -->
             <div style="margin-top:12px;">
                 <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--color-texto-tenue);margin-bottom:8px;">
                     Miembros (${(g.miembros || []).length})
@@ -129,7 +126,6 @@ const GruposPanel = (() => {
                     </div>
                     <div class="modal-form">
 
-                        <!-- Datos básicos -->
                         <div class="campo-grupo">
                             <label class="campo-etiqueta">Nombre del grupo *</label>
                             <input class="campo-input" id="ng-nombre" type="text" placeholder="Ej: GRUPO_VENTAS">
@@ -139,7 +135,6 @@ const GruposPanel = (() => {
                             <input class="campo-input" id="ng-descripcion" type="text" placeholder="Descripción del grupo">
                         </div>
 
-                        <!-- Módulos que puede gestionar -->
                         <div class="campo-grupo">
                             <label class="campo-etiqueta">Módulos que puede gestionar</label>
                             <div style="background:var(--color-superficie-2);border:1px solid var(--color-borde);
@@ -156,7 +151,6 @@ const GruposPanel = (() => {
                             <small style="color:var(--color-texto-tenue);">Los usuarios de este grupo podrán acceder a los módulos marcados</small>
                         </div>
 
-                        <!-- Miembros iniciales -->
                         <div class="campo-grupo">
                             <label class="campo-etiqueta">Miembros iniciales</label>
                             <select class="campo-select" id="ng-usuarios" multiple style="height:110px;">
