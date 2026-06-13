@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import com.tfg.trabajoFinGrado.modulos.usuarios.modelo.Grupo;
+import com.tfg.trabajoFinGrado.modulos.usuarios.repositorio.RepositorioGrupo;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ import java.util.List;
 public class ControladorUsuario {
 
     private final ServicioUsuario servicioUsuario;
+    private final RepositorioGrupo repositorioGrupo;
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -33,6 +36,7 @@ public class ControladorUsuario {
     public ResponseEntity<RespuestaApi<RespuestaUsuario>> obtenerPorId(
             @PathVariable Long id,
             @AuthenticationPrincipal Usuario usuarioActual) {
+        
         if (!usuarioActual.getId().equals(id) && !usuarioActual.esAdmin()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body(RespuestaApi.error("Acceso denegado"));
@@ -44,9 +48,9 @@ public class ControladorUsuario {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RespuestaApi<RespuestaUsuario>> crear(
             @Valid @RequestBody PeticionCrearUsuario peticion) {
+        RespuestaUsuario usuario = servicioUsuario.crear(peticion);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(RespuestaApi.exito("Usuario creado correctamente",
-                        servicioUsuario.crear(peticion)));
+                .body(RespuestaApi.exito("Usuario creado correctamente", usuario));
     }
 
     @PutMapping("/{id}/perfil")
@@ -54,8 +58,8 @@ public class ControladorUsuario {
             @PathVariable Long id,
             @Valid @RequestBody PeticionEditarPerfil peticion,
             @AuthenticationPrincipal Usuario usuarioActual) {
-        return ResponseEntity.ok(RespuestaApi.exito("Perfil actualizado correctamente",
-                servicioUsuario.editarPerfil(id, peticion, usuarioActual)));
+        RespuestaUsuario actualizado = servicioUsuario.editarPerfil(id, peticion, usuarioActual);
+        return ResponseEntity.ok(RespuestaApi.exito("Perfil actualizado correctamente", actualizado));
     }
 
     @DeleteMapping("/{id}")
@@ -63,5 +67,16 @@ public class ControladorUsuario {
     public ResponseEntity<RespuestaApi<Void>> eliminar(@PathVariable Long id) {
         servicioUsuario.eliminar(id);
         return ResponseEntity.ok(RespuestaApi.exito("Usuario eliminado correctamente", null));
+    }
+
+    @GetMapping("/empleados")
+    public ResponseEntity<RespuestaApi<List<RespuestaUsuario>>> obtenerEmpleados() {
+        return ResponseEntity.ok(RespuestaApi.exito(servicioUsuario.obtenerEmpleados()));
+    }
+
+    @GetMapping("/grupos-disponibles")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<RespuestaApi<List<Grupo>>> obtenerGruposDisponibles() {
+        return ResponseEntity.ok(RespuestaApi.exito(repositorioGrupo.findAll()));
     }
 }
