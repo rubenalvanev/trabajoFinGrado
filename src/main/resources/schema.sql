@@ -103,3 +103,18 @@ CREATE TABLE IF NOT EXISTS proyectos_clientes (
     cliente_id BIGINT NOT NULL REFERENCES clientes(id) ON DELETE CASCADE,
     PRIMARY KEY (proyecto_id, cliente_id)
 );
+
+-- ====================================================
+-- Módulo de Inventario
+-- ====================================================
+CREATE TABLE IF NOT EXISTS stock (
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    proveedor VARCHAR(255) NOT NULL,
+    cantidad_total INTEGER NOT NULL DEFAULT 0,
+    precio NUMERIC(15, 2) NOT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_por BIGINT NOT NULL REFERENCES usuarios(id),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW()
+);
