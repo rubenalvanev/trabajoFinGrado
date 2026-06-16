@@ -317,6 +317,23 @@ tbody td { padding: 12px 14px; font-size: 14px; }
 .modal-form { display: flex; flex-direction: column; gap: 16px; }
 .modal-acciones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
 
+/* ====================================================
+   MÓDULO: PROYECTOS
+   ==================================================== */
+.tarjeta-proyecto {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-base);
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: var(--transicion);
+}
+.tarjeta-proyecto:hover { border-color: var(--color-primario); }
+.proyecto-cabecera { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.proyecto-nombre { font-family: var(--fuente-display); font-size: 15px; font-weight: 700; }
+.proyecto-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--color-texto-secundario); }
+.proyecto-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+
 .cuadricula-modulos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .tarjeta-modulo {
     background: var(--color-superficie);
