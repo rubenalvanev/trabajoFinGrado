@@ -67,9 +67,6 @@ CREATE TABLE IF NOT EXISTS fichajes (
     UNIQUE(usuario_id, fecha)
 );
 
--- ====================================================
--- Módulo de Proyectos
--- ====================================================
 CREATE TABLE IF NOT EXISTS clientes (
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -104,9 +101,6 @@ CREATE TABLE IF NOT EXISTS proyectos_clientes (
     PRIMARY KEY (proyecto_id, cliente_id)
 );
 
--- ====================================================
--- Módulo de Inventario
--- ====================================================
 CREATE TABLE IF NOT EXISTS stock (
     id BIGSERIAL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -117,4 +111,28 @@ CREATE TABLE IF NOT EXISTS stock (
     creado_por BIGINT NOT NULL REFERENCES usuarios(id),
     creado_en TIMESTAMP DEFAULT NOW(),
     actualizado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS documentos (
+    id BIGSERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(500),
+    categoria VARCHAR(20) NOT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_por BIGINT NOT NULL REFERENCES usuarios(id),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS versiones_documento (
+    id BIGSERIAL PRIMARY KEY,
+    documento_id BIGINT NOT NULL REFERENCES documentos(id) ON DELETE CASCADE,
+    numero_version INTEGER NOT NULL,
+    nombre_archivo VARCHAR(255) NOT NULL,
+    ruta_almacenamiento VARCHAR(500) NOT NULL,
+    tipo_mime VARCHAR(100),
+    tamanio_bytes BIGINT,
+    comentario VARCHAR(500),
+    subido_por BIGINT NOT NULL REFERENCES usuarios(id),
+    subido_en TIMESTAMP DEFAULT NOW()
 );

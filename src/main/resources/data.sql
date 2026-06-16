@@ -32,3 +32,7 @@ INSERT INTO modulos_activos (modulo_id, activado_por)
 SELECT m.id, u.id FROM modulos m, usuarios u
 WHERE m.clave = 'GRUPOS' AND u.email = 'admin@localytics.com'
 ON CONFLICT (modulo_id) DO NOTHING;
+
+INSERT INTO modulos (clave, nombre, descripcion, icono, obligatorio, orden)
+VALUES ('DOCUMENTOS', 'Documentos', 'Gestión documental con versionado y categorías', 'file-text', FALSE, 6)
+ON CONFLICT (clave) DO NOTHING;
