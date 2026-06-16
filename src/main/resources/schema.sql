@@ -39,6 +39,34 @@ CREATE TABLE IF NOT EXISTS modulos_activos (
     UNIQUE(modulo_id)
 );
 
+CREATE TABLE IF NOT EXISTS grupos_usuarios (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+    grupo_id BIGINT NOT NULL REFERENCES grupos(id) ON DELETE CASCADE,
+    asignado_en TIMESTAMP DEFAULT NOW(),
+    UNIQUE(usuario_id, grupo_id)
+);
+
+CREATE TABLE IF NOT EXISTS grupos_modulos (
+    id BIGSERIAL PRIMARY KEY,
+    grupo_id BIGINT NOT NULL REFERENCES grupos(id) ON DELETE CASCADE,
+    modulo_id BIGINT NOT NULL REFERENCES modulos(id) ON DELETE CASCADE,
+    UNIQUE(grupo_id, modulo_id)
+);
+
+CREATE TABLE IF NOT EXISTS fichajes (
+    id BIGSERIAL PRIMARY KEY,
+    usuario_id BIGINT NOT NULL REFERENCES usuarios(id),
+    fecha DATE NOT NULL DEFAULT CURRENT_DATE,
+    hora_entrada TIMESTAMP,
+    hora_salida TIMESTAMP,
+    jornada_horas INTEGER NOT NULL DEFAULT 8,
+    observaciones VARCHAR(500),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW(),
+    UNIQUE(usuario_id, fecha)
+);
+
 -- ====================================================
 -- Módulo de Proyectos
 -- ====================================================

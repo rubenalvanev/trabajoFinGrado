@@ -37,8 +37,7 @@ public class ServicioUsuario {
     @Transactional
     public RespuestaUsuario crear(PeticionCrearUsuario peticion) {
         if (repositorioUsuario.existsByEmail(peticion.getEmail())) {
-            throw new IllegalArgumentException(
-                    "Ya existe un usuario con el email: " + peticion.getEmail());
+            throw new IllegalArgumentException("Ya existe un usuario con el email: " + peticion.getEmail());
         }
 
         Grupo grupo = null;
@@ -61,8 +60,7 @@ public class ServicioUsuario {
     }
 
     @Transactional
-    public RespuestaUsuario editarPerfil(Long idUsuario, PeticionEditarPerfil peticion,
-                                         Usuario usuarioActual) {
+    public RespuestaUsuario editarPerfil(Long idUsuario, PeticionEditarPerfil peticion, Usuario usuarioActual) {
         if (!usuarioActual.getId().equals(idUsuario) && !usuarioActual.esAdmin()) {
             throw new AccesoDenegadoExcepcion("Solo puedes editar tu propio perfil");
         }
@@ -77,12 +75,10 @@ public class ServicioUsuario {
         }
         if (peticion.getNuevaContrasena() != null && !peticion.getNuevaContrasena().isBlank()) {
             if (peticion.getContrasenaActual() == null ||
-                    !codificadorContrasena.matches(
-                            peticion.getContrasenaActual(), usuario.getContrasena())) {
+                    !codificadorContrasena.matches(peticion.getContrasenaActual(), usuario.getContrasena())) {
                 throw new IllegalArgumentException("La contraseña actual no es correcta");
             }
-            usuario.setContrasena(
-                    codificadorContrasena.encode(peticion.getNuevaContrasena()));
+            usuario.setContrasena(codificadorContrasena.encode(peticion.getNuevaContrasena()));
         }
 
         return mapearADto(repositorioUsuario.save(usuario));
@@ -102,8 +98,7 @@ public class ServicioUsuario {
 
     private Usuario buscarUsuario(Long id) {
         return repositorioUsuario.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion(
-                        "Usuario no encontrado con id: " + id));
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("Usuario no encontrado con id: " + id));
     }
 
     public RespuestaUsuario mapearADto(Usuario usuario) {
