@@ -136,3 +136,15 @@ CREATE TABLE IF NOT EXISTS versiones_documento (
     subido_por BIGINT NOT NULL REFERENCES usuarios(id),
     subido_en TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS registros_financieros (
+    id BIGSERIAL PRIMARY KEY,
+    tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('BENEFICIO', 'GASTO')),
+    descripcion VARCHAR(255) NOT NULL,
+    importe NUMERIC(15, 2) NOT NULL,
+    categoria VARCHAR(100),
+    fecha DATE NOT NULL DEFAULT CURRENT_DATE,
+    creado_por BIGINT NOT NULL REFERENCES usuarios(id),
+    creado_en TIMESTAMP DEFAULT NOW(),
+    actualizado_en TIMESTAMP DEFAULT NOW()
+);

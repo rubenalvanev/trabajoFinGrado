@@ -269,6 +269,24 @@ html, body {
 }
 .tarjeta-titulo { font-family: var(--fuente-display); font-size: 16px; font-weight: 700; }
 
+.cuadricula-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.tarjeta-estadistica {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-base);
+    padding: 20px;
+}
+.est-etiqueta { font-size: 12px; color: var(--color-texto-secundario); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.est-valor { font-family: var(--fuente-display); font-size: 26px; font-weight: 700; }
+.est-valor.positivo { color: var(--color-exito); }
+.est-valor.negativo { color: var(--color-peligro); }
+.est-valor.neutral { color: var(--color-texto); }
+
 .contenedor-tabla { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
 thead th {
@@ -288,6 +306,12 @@ tbody td { padding: 12px 14px; font-size: 14px; }
     font-size: 12px; font-weight: 500;
 }
 
+.badge-beneficio { background: rgba(34,197,94,0.1); color: #86efac; }
+.badge-gasto { background: rgba(239,68,68,0.1); color: #fca5a5; }
+.badge-planificando { background: rgba(99,102,241,0.1); color: #a5b4fc; }
+.badge-en_proceso { background: rgba(245,158,11,0.1); color: #fcd34d; }
+.badge-finalizando { background: rgba(59,130,246,0.1); color: #93c5fd; }
+.badge-acabado { background: rgba(34,197,94,0.1); color: #86efac; }
 .badge-admin { background: rgba(139,92,246,0.15); color: #c4b5fd; }
 .badge-usuario { background: rgba(99,102,241,0.1); color: #a5b4fc; }
 
@@ -316,23 +340,6 @@ tbody td { padding: 12px 14px; font-size: 14px; }
 .modal-titulo { font-family: var(--fuente-display); font-size: 18px; font-weight: 700; }
 .modal-form { display: flex; flex-direction: column; gap: 16px; }
 .modal-acciones { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
-
-/* ====================================================
-   MÓDULO: PROYECTOS
-   ==================================================== */
-.tarjeta-proyecto {
-    background: var(--color-superficie);
-    border: 1px solid var(--color-borde);
-    border-radius: var(--radio-base);
-    padding: 20px;
-    margin-bottom: 12px;
-    transition: var(--transicion);
-}
-.tarjeta-proyecto:hover { border-color: var(--color-primario); }
-.proyecto-cabecera { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
-.proyecto-nombre { font-family: var(--fuente-display); font-size: 15px; font-weight: 700; }
-.proyecto-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--color-texto-secundario); }
-.proyecto-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .cuadricula-modulos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 .tarjeta-modulo {
@@ -394,6 +401,36 @@ tbody td { padding: 12px 14px; font-size: 14px; }
 }
 .toggle.activo::after { transform: translateX(18px); }
 .toggle-texto { font-size: 13px; color: var(--color-texto-secundario); }
+
+
+.cuadricula-graficos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.tarjeta-grafico {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-base);
+    padding: 20px;
+    display: flex; flex-direction: column; align-items: center;
+}
+.grafico-titulo { font-size: 13px; font-weight: 600; color: var(--color-texto-secundario); text-align: center; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+canvas.grafico-donut { max-width: 180px; max-height: 180px; }
+
+
+.barra-acciones { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+
+
+.tarjeta-proyecto {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-base);
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: var(--transicion);
+}
+.tarjeta-proyecto:hover { border-color: var(--color-primario); }
+.proyecto-cabecera { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.proyecto-nombre { font-family: var(--fuente-display); font-size: 15px; font-weight: 700; }
+.proyecto-meta { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--color-texto-secundario); }
+.proyecto-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
 
 .usuario-fila { display: flex; align-items: center; gap: 14px; }
 .avatar-tabla { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primario), var(--color-acento)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: white; flex-shrink: 0; }
