@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * DTO de respuesta para un documento con sus versiones.
- */
 @Data
 @Builder
 @NoArgsConstructor

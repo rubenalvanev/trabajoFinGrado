@@ -1,7 +1,3 @@
-/**
- * Módulo de Proyectos.
- * Gestión de proyectos, estados, empleados y clientes.
- */
 const ProyectosPanel = (() => {
 
     const COLORES_ESTADO = {
@@ -69,7 +65,6 @@ const ProyectosPanel = (() => {
             <div id="modal-proyectos"></div>
         `;
 
-        // Guardar empleados y clientes para uso en modales
         window._proyectosEmpleados = empleados;
         window._proyectosClientes = clientes;
     };

@@ -77,7 +77,6 @@ public class ServicioDocumentos {
                 .build();
         documento = repositorioDocumento.save(documento);
 
-        // Guardar la primera versión
         guardarVersion(documento, archivo, comentario, autor, 1);
 
         return mapearADto(repositorioDocumento.findById(documento.getId()).orElseThrow());

@@ -37,7 +37,6 @@ const FinanzasPanel = (() => {
         const totalActual = Number(resumen.totalMesActual || 0);
 
         area.innerHTML = `
-            <!-- Estadísticas rápidas -->
             <div class="cuadricula-estadisticas" style="margin-bottom:20px;">
                 <div class="tarjeta-estadistica">
                     <div class="est-etiqueta">Total beneficios</div>
@@ -57,7 +56,6 @@ const FinanzasPanel = (() => {
                 </div>
             </div>
 
-            <!-- Gráficos -->
             <div class="cuadricula-graficos" style="margin-bottom:24px;">
                 <div class="tarjeta-grafico">
                     <div class="grafico-titulo">Beneficios del mes</div>
@@ -82,7 +80,6 @@ const FinanzasPanel = (() => {
                 </div>
             </div>
 
-            <!-- Barra de acciones -->
             <div class="barra-acciones" style="margin-bottom:16px;">
                 <h3 class="tarjeta-titulo">Registros financieros</h3>
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
@@ -97,7 +94,6 @@ const FinanzasPanel = (() => {
                 </div>
             </div>
 
-            <!-- Tabla -->
             <div class="tarjeta">
                 <div class="contenedor-tabla">
                     <table>
